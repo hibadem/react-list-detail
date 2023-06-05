@@ -39,8 +39,11 @@ const basketSlice = createSlice({
         state.products[existingProductIndex].count--;
         state.total_amount -= parseFloat(state.products[existingProductIndex].item.price);
       } else {
-        state.products = state.products.filter(product => product.item.id !== action.payload);
-        state.total_amount -= parseFloat(state.products[existingProductIndex].item.price);
+        const removedProduct = state.products[existingProductIndex];
+        state.products = state.products.filter(
+          (product) => product.item.id !== action.payload
+        );
+        state.total_amount -= parseFloat(removedProduct.item.price);
       }
     },
   },
